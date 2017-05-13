@@ -16,7 +16,7 @@ public class FirstTypeParser extends MessageParser {
         final Matcher matcher = p.matcher(message);
         final SalesMessage.Builder builder = SalesMessage.builder();
         while (matcher.find()) {
-            builder.withProductName(matcher.group(1));
+            builder.withProductName(matcher.group(1).toLowerCase());
             builder.withValuePerOne(Integer.valueOf(matcher.group(2)));
             builder.withQuanitity(1);
         }

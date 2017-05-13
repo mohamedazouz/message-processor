@@ -98,4 +98,16 @@ public class InMemorySalesRepository implements SalesRepository {
         System.out.println("=================================");
 
     }
+
+    public Map<String, ProductInfo> getProductSalesMap() {
+        return productSalesMap;
+    }
+
+    public Set<String> getProductsSet() {
+        return productsSet;
+    }
+
+    public List<String> getAdjustmentSaleReport() {
+        return adjustmentSaleReport;
+    }
 }

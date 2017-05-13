@@ -18,7 +18,7 @@ public class ThirdTypeParser extends MessageParser {
         final Matcher matcher = p.matcher(message);
         final AdjustmentMessage.Builder builder = AdjustmentMessage.builder();
         while (matcher.find()) {
-            builder.withProductName(matcher.group(3));
+            builder.withProductName(matcher.group(3).toLowerCase());
             builder.withValue(Integer.valueOf(matcher.group(2)));
             builder.withOperation(fromOperationAlias(matcher.group(1)));
         }

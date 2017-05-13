@@ -16,7 +16,7 @@ public class SecondTypeParser extends MessageParser {
         final Matcher matcher = p.matcher(message);
         final SalesMessage.Builder builder = SalesMessage.builder();
         while (matcher.find()) {
-            builder.withProductName(matcher.group(2));
+            builder.withProductName(matcher.group(2).toLowerCase());
             builder.withValuePerOne(Integer.valueOf(matcher.group(3)));
             builder.withQuanitity(Integer.valueOf(matcher.group(1)));
         }

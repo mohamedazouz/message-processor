@@ -54,6 +54,9 @@ public class FileMessageProcessor implements MessageProcessor {
         }
         salesRepository.printSalesReport();
         salesRepository.printAdjustmentReport();
+    }
 
+    public SalesRepository getSalesRepository() {
+        return salesRepository;
     }
 }
