@@ -18,6 +18,10 @@ public class FileMessageProcessor implements MessageProcessor {
     private final MessageParser messageParser;
     private final SalesRepository salesRepository;
 
+    private final int NUMBER_SALES_TO_LOG_REPORT = 10;
+
+    private final int NUMBER_SALES_TO_LOG_ADJUSTMENT = 50;
+
     public FileMessageProcessor(final File messagesFile, final MessageParser messageParser,
             final SalesRepository salesRepository) throws
             FileNotFoundException {
@@ -27,6 +31,7 @@ public class FileMessageProcessor implements MessageProcessor {
     }
 
     public void process() {
+        int i = 1;
         while (filerReader.hasNext()) {
             final String message = filerReader.nextLine();
             try {
@@ -35,6 +40,18 @@ public class FileMessageProcessor implements MessageProcessor {
                     throw new ParserException(MessageFormat.format("Wrong message: {0}", message));
                 }
                 salesRepository.addSale(salesMessage);
+                if (i % NUMBER_SALES_TO_LOG_REPORT == 0) {
+                    salesRepository.printSalesReport();
+                }
+                if (i % NUMBER_SALES_TO_LOG_ADJUSTMENT == 0) {
+                    salesRepository.printAdjustmentReport();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                i++;
             } catch (final ParserException ex) {
                 System.err.println(ex.getMessage());
             }
