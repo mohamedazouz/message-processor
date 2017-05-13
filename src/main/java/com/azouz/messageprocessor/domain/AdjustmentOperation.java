@@ -21,6 +21,9 @@ public enum AdjustmentOperation {
                 final AdjustmentMessage adjustmentMessage) {
             final int newValue = oldProductInfo.getValue() -
                     adjustmentMessage.getValue() * oldProductInfo.getQuanitity();
+            if(newValue < 0) {
+                throw new RuntimeException("Value can't be less than 0");
+            }
             return new ProductInfo(oldProductInfo.getNumberofSale(), oldProductInfo.getQuanitity(),
                     newValue);
         }

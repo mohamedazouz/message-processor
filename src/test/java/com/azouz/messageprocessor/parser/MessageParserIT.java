@@ -1,10 +1,14 @@
 package com.azouz.messageprocessor.parser;
 
 
+import com.azouz.messageprocessor.domain.AdjustmentMessage;
 import com.azouz.messageprocessor.domain.Message;
+import com.azouz.messageprocessor.domain.ProductInfo;
 import org.junit.Test;
 
 import static com.azouz.messageprocessor.domain.AdjustmentOperation.MUL;
+import static com.azouz.messageprocessor.domain.AdjustmentOperation.SUB;
+import static com.azouz.messageprocessor.domain.AdjustmentOperationTest.performOperationTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -62,5 +66,52 @@ public class MessageParserIT {
         assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "betekhssssssssssssss");
         assertEquals(salesMessage.getAdjustmentMessage().getOperation(), MUL);
         assertEquals(salesMessage.getAdjustmentMessage().getValue(), 200);
+    }
+
+
+
+    @Test
+    public void parseThirdTypeWithMultipleparsersThenPrform() {
+        final MessageParser parser = new SecondTypeParser();
+        final MessageParser thirdTypeParser = new ThirdTypeParser();
+        final MessageParser firstTypeParser = new FirstTypeParser();
+        parser.setNextMessagerParser(thirdTypeParser);
+        thirdTypeParser.setNextMessagerParser(firstTypeParser);
+
+
+        final Message salesMessage = parser.parseMessage("Mul 200USD betekhsssssssssssssss");
+        assertNotNull(salesMessage);
+        assertNotNull(salesMessage.getAdjustmentMessage());
+        assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "betekhssssssssssssss");
+        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), MUL);
+        assertEquals(salesMessage.getAdjustmentMessage().getValue(), 200);
+
+        final AdjustmentMessage adjustmentMessage = salesMessage.getAdjustmentMessage();
+        final ProductInfo oldProductInfo = new ProductInfo(2, 100, 1000);
+        final ProductInfo expectedProductInfo = new ProductInfo(2, 100, 20000000);
+        performOperationTest(oldProductInfo, expectedProductInfo, adjustmentMessage);
+    }
+
+
+    @Test(expected = RuntimeException.class)
+    public void parseThirdTypeWithSubparsersThenPrform() {
+        final MessageParser parser = new SecondTypeParser();
+        final MessageParser thirdTypeParser = new ThirdTypeParser();
+        final MessageParser firstTypeParser = new FirstTypeParser();
+        parser.setNextMessagerParser(thirdTypeParser);
+        thirdTypeParser.setNextMessagerParser(firstTypeParser);
+
+
+        final Message salesMessage = parser.parseMessage("Sub 200USD betekhsssssssssssssss");
+        assertNotNull(salesMessage);
+        assertNotNull(salesMessage.getAdjustmentMessage());
+        assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "betekhssssssssssssss");
+        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), SUB);
+        assertEquals(salesMessage.getAdjustmentMessage().getValue(), 200);
+
+        final AdjustmentMessage adjustmentMessage = salesMessage.getAdjustmentMessage();
+        final ProductInfo oldProductInfo = new ProductInfo(2, 100, 1000);
+        final ProductInfo expectedProductInfo = new ProductInfo(2, 100, 20000000);
+        performOperationTest(oldProductInfo, expectedProductInfo, adjustmentMessage);
     }
 }

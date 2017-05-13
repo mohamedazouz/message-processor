@@ -1,7 +1,6 @@
 package com.azouz.messageprocessor.parser;
 
 
-import com.azouz.messageprocessor.domain.AdjustmentOperation;
 import com.azouz.messageprocessor.domain.Message;
 import org.junit.Before;
 import org.junit.Test;

@@ -21,7 +21,7 @@ public class Application {
         final Application application = new Application();
 
         if (args.length > 0) {
-            final String fileName = args[0];;
+            final String fileName = args[0];
             final File file = new File(fileName);
             if (!file.exists() || !file.canRead()) {
                 System.err.println(

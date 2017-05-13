@@ -49,4 +49,26 @@ public class ProductInfo {
                 ", value=" + value +
                 '}';
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProductInfo)) return false;
+
+        final ProductInfo that = (ProductInfo) o;
+
+        if (getNumberofSale() != that.getNumberofSale()) return false;
+        if (getQuanitity() != that.getQuanitity()) return false;
+        if (getValue() != that.getValue()) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getNumberofSale();
+        result = 31 * result + getQuanitity();
+        result = 31 * result + getValue();
+        return result;
+    }
 }

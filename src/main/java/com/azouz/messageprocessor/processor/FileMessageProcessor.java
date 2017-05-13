@@ -45,14 +45,10 @@ public class FileMessageProcessor implements MessageProcessor {
                 }
                 if (i % NUMBER_SALES_TO_LOG_ADJUSTMENT == 0) {
                     salesRepository.printAdjustmentReport();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Thread.sleep(3000);
                 }
                 i++;
-            } catch (final ParserException ex) {
+            } catch (final Exception ex) {
                 System.err.println(ex.getMessage());
             }
         }
