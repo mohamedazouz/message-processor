@@ -1,7 +1,7 @@
 package com.azouz.messageprocessor.parser;
 
-import com.azouz.messageprocessor.domain.AdjustmentSaleMessage;
-import com.azouz.messageprocessor.domain.SalesMessage;
+import com.azouz.messageprocessor.domain.AdjustmentMessage;
+import com.azouz.messageprocessor.domain.Message;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,16 +11,16 @@ import java.util.regex.Pattern;
  */
 public class ThirdTypeParser extends MessageParser {
 
-    protected SalesMessage parse(final String message) {
+    protected Message parse(final String message) {
         final Pattern p = Pattern.compile(getRegex());
         final Matcher matcher = p.matcher(message);
-        final AdjustmentSaleMessage.Builder builder = AdjustmentSaleMessage.builder();
+        final AdjustmentMessage.Builder builder = AdjustmentMessage.builder();
         while (matcher.find()) {
             builder.withProductName(matcher.group(3));
             builder.withValue(Integer.valueOf(matcher.group(2)));
             builder.withOperation(matcher.group(1));
         }
-        return builder.build();
+        return new Message(null, builder.build());
     }
 
 

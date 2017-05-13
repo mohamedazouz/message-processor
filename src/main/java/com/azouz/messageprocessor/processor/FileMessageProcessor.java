@@ -1,5 +1,6 @@
 package com.azouz.messageprocessor.processor;
 
+import com.azouz.messageprocessor.domain.Message;
 import com.azouz.messageprocessor.domain.SalesMessage;
 import com.azouz.messageprocessor.parser.MessageParser;
 import com.azouz.messageprocessor.parser.ParserException;
@@ -26,7 +27,7 @@ public class FileMessageProcessor implements MessageProcessor {
         while (filerReader.hasNext()) {
             final String message = filerReader.nextLine();
             try {
-                final SalesMessage salesMessage = messageParser.parseMessage(message);
+                final Message salesMessage = messageParser.parseMessage(message);
                 if (salesMessage == null) {
                     throw new ParserException(MessageFormat.format("Wrong message: {0}", message));
                 }

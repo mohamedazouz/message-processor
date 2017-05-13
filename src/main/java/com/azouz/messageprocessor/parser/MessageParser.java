@@ -1,6 +1,6 @@
 package com.azouz.messageprocessor.parser;
 
-import com.azouz.messageprocessor.domain.SalesMessage;
+import com.azouz.messageprocessor.domain.Message;
 
 /**
  * @author mazouz
@@ -13,7 +13,7 @@ public abstract class MessageParser {
         this.nextMessagerParser = nextMessagerParser;
     }
 
-    public SalesMessage parseMessage(final String message) {
+    public Message parseMessage(final String message) {
         if (message.matches(getRegex())) {
             return parse(message);
         }
@@ -23,7 +23,7 @@ public abstract class MessageParser {
         return null;
     }
 
-    protected abstract SalesMessage parse(final String message);
+    protected abstract Message parse(final String message);
 
     protected abstract String getRegex();
 }

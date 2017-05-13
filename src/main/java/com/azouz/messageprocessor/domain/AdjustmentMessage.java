@@ -3,12 +3,12 @@ package com.azouz.messageprocessor.domain;
 /**
  * @author mazouz
  */
-public class AdjustmentSaleMessage implements SalesMessage {
+public class AdjustmentMessage {
     final String operation;
     final String productName;
     final int value;
 
-    public AdjustmentSaleMessage(final Builder builder) {
+    public AdjustmentMessage(final Builder builder) {
         this.operation = builder.operation;
         this.productName = builder.productName;
         this.value = builder.value;
@@ -32,7 +32,7 @@ public class AdjustmentSaleMessage implements SalesMessage {
 
     @Override
     public String toString() {
-        return "AdjustmentSaleMessage{" +
+        return "AdjustmentMessage{" +
                 "operation='" + operation + '\'' +
                 ", productName='" + productName + '\'' +
                 ", value=" + value +
@@ -59,8 +59,8 @@ public class AdjustmentSaleMessage implements SalesMessage {
             return this;
         }
 
-        public AdjustmentSaleMessage build() {
-            return new AdjustmentSaleMessage(this);
+        public AdjustmentMessage build() {
+            return new AdjustmentMessage(this);
         }
     }
 }
