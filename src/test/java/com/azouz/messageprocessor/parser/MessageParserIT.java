@@ -4,6 +4,7 @@ package com.azouz.messageprocessor.parser;
 import com.azouz.messageprocessor.domain.Message;
 import org.junit.Test;
 
+import static com.azouz.messageprocessor.domain.AdjustmentOperation.MUL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -59,7 +60,7 @@ public class MessageParserIT {
         assertNotNull(salesMessage);
         assertNotNull(salesMessage.getAdjustmentMessage());
         assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "betekhssssssssssssss");
-        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), "Mul");
+        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), MUL);
         assertEquals(salesMessage.getAdjustmentMessage().getValue(), 200);
     }
 }

@@ -6,7 +6,9 @@ import com.azouz.messageprocessor.domain.Message;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.azouz.messageprocessor.domain.AdjustmentOperation.ADD;
 import static com.azouz.messageprocessor.domain.AdjustmentOperation.MUL;
+import static com.azouz.messageprocessor.domain.AdjustmentOperation.SUB;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -29,7 +31,7 @@ public class ThirdTypeParserTest {
         assertNotNull(salesMessage);
         assertNotNull(salesMessage.getAdjustmentMessage());
         assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "apple");
-        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), "Add");
+        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), ADD);
         assertEquals(salesMessage.getAdjustmentMessage().getValue(), 20);
     }
 
@@ -39,7 +41,7 @@ public class ThirdTypeParserTest {
         assertNotNull(salesMessage);
         assertNotNull(salesMessage.getAdjustmentMessage());
         assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "apple");
-        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), "Sub");
+        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), SUB);
         assertEquals(salesMessage.getAdjustmentMessage().getValue(), 20);
     }
 
