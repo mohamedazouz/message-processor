@@ -6,6 +6,8 @@ import com.azouz.messageprocessor.domain.Message;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.azouz.messageprocessor.domain.AdjustmentOperation.fromOperationAlias;
+
 /**
  * @author mazouz
  */
@@ -18,7 +20,7 @@ public class ThirdTypeParser extends MessageParser {
         while (matcher.find()) {
             builder.withProductName(matcher.group(3));
             builder.withValue(Integer.valueOf(matcher.group(2)));
-            builder.withOperation(matcher.group(1));
+            builder.withOperation(fromOperationAlias(matcher.group(1)));
         }
         return new Message(null, builder.build());
     }

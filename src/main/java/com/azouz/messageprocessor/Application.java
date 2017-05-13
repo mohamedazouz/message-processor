@@ -6,6 +6,8 @@ import com.azouz.messageprocessor.parser.SecondTypeParser;
 import com.azouz.messageprocessor.parser.ThirdTypeParser;
 import com.azouz.messageprocessor.processor.FileMessageProcessor;
 import com.azouz.messageprocessor.processor.MessageProcessor;
+import com.azouz.messageprocessor.repository.InMemorySalesRepository;
+import com.azouz.messageprocessor.repository.SalesRepository;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,7 +32,8 @@ public class Application {
                         MessageFormat.format("File: \"{0}\" may not be exists or not having right permissions",
                                 fileName));
             }
-            final MessageProcessor fileMessageProcessor = new FileMessageProcessor(file, messageParser());
+            final SalesRepository salesRepository = new InMemorySalesRepository();
+            final MessageProcessor fileMessageProcessor = new FileMessageProcessor(file, messageParser(), salesRepository);
             fileMessageProcessor.process();
 
         } catch (final Exception ex) {

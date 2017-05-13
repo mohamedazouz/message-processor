@@ -1,10 +1,12 @@
 package com.azouz.messageprocessor.parser;
 
 
+import com.azouz.messageprocessor.domain.AdjustmentOperation;
 import com.azouz.messageprocessor.domain.Message;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.azouz.messageprocessor.domain.AdjustmentOperation.MUL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -47,7 +49,7 @@ public class ThirdTypeParserTest {
         assertNotNull(salesMessage);
         assertNotNull(salesMessage.getAdjustmentMessage());
         assertEquals(salesMessage.getAdjustmentMessage().getProductName(), "apple");
-        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), "Mul");
+        assertEquals(salesMessage.getAdjustmentMessage().getOperation(), MUL);
         assertEquals(salesMessage.getAdjustmentMessage().getValue(), 20);
     }
 

@@ -4,7 +4,7 @@ package com.azouz.messageprocessor.domain;
  * @author mazouz
  */
 public class AdjustmentMessage {
-    final String operation;
+    final AdjustmentOperation operation;
     final String productName;
     final int value;
 
@@ -18,7 +18,7 @@ public class AdjustmentMessage {
         return new Builder();
     }
 
-    public String getOperation() {
+    public AdjustmentOperation getOperation() {
         return operation;
     }
 
@@ -40,7 +40,7 @@ public class AdjustmentMessage {
     }
 
     public static class Builder {
-        private String operation;
+        private AdjustmentOperation operation;
         private String productName;
         private int value;
 
@@ -54,7 +54,7 @@ public class AdjustmentMessage {
             return this;
         }
 
-        public Builder withOperation(final String operation) {
+        public Builder withOperation(final AdjustmentOperation operation) {
             this.operation = operation;
             return this;
         }
