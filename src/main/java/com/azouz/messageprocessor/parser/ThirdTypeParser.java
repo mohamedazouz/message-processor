@@ -26,6 +26,6 @@ public class ThirdTypeParser extends MessageParser {
 
     protected String getRegex() {
         // Add 20p apples
-        return "^(Add|Sub|Mul)\\s(\\d+)p\\s(\\w+)s$";
+        return "^(Add|Sub|Mul)\\s(\\d+)\\w+\\s(\\w+)s$";
     }
 }

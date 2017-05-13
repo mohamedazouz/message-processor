@@ -25,6 +25,6 @@ public class SecondTypeParser extends MessageParser {
 
     protected String getRegex() {
         //20 sales of apples at 10p each
-        return "^(\\d+)\\ssales\\sof\\s(\\w+)s\\sat\\s(\\d+)p\\seach$";
+        return "^(\\d+)\\ssales\\sof\\s(\\w+)s\\sat\\s(\\d+)\\w+\\seach$";
     }
 }

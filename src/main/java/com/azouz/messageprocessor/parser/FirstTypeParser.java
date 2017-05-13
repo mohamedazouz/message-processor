@@ -26,6 +26,6 @@ public class FirstTypeParser extends MessageParser {
 
     protected String getRegex() {
         // apple at 10p
-        return "^(\\w+)\\sat\\s(\\d+)p$";
+        return "^(\\w+)\\sat\\s(\\d+)\\w+$";
     }
 }
