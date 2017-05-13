@@ -56,5 +56,8 @@ public class FileMessageProcessor implements MessageProcessor {
                 System.err.println(ex.getMessage());
             }
         }
+        salesRepository.printSalesReport();
+        salesRepository.printAdjustmentReport();
+
     }
 }

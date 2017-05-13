@@ -1,10 +1,13 @@
 package com.azouz.messageprocessor.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author mazouz
  */
 public enum AdjustmentOperation {
-    ADD("add") {
+    ADD("add", "addition") {
         public ProductInfo performOperation(final ProductInfo oldProductInfo,
                 final AdjustmentMessage adjustmentMessage) {
             final int newValue = oldProductInfo.getValue() +
@@ -13,7 +16,7 @@ public enum AdjustmentOperation {
                     newValue);
         }
     },
-    SUB("sub") {
+    SUB("sub", "subtract") {
         public ProductInfo performOperation(final ProductInfo oldProductInfo,
                 final AdjustmentMessage adjustmentMessage) {
             final int newValue = oldProductInfo.getValue() -
@@ -22,7 +25,7 @@ public enum AdjustmentOperation {
                     newValue);
         }
     },
-    MUL("mul") {
+    MUL("mul", "multiply") {
         public ProductInfo performOperation(final ProductInfo oldProductInfo,
                 final AdjustmentMessage adjustmentMessage) {
             final int newValue = oldProductInfo.getValue() *
@@ -32,15 +35,19 @@ public enum AdjustmentOperation {
         }
     };
 
-    final String operationAlias;
+    final Set<String> operationAliases;
 
-    AdjustmentOperation(final String operationAlias) {
-        this.operationAlias = operationAlias;
+    AdjustmentOperation(final String... aliases) {
+        this.operationAliases = new HashSet<String>();
+        for (final String alias : aliases) {
+            operationAliases.add(alias);
+        }
+
     }
 
     public static AdjustmentOperation fromOperationAlias(final String operationAlias) {
         for (final AdjustmentOperation operation : AdjustmentOperation.values()) {
-            if (operation.operationAlias.equals(operationAlias.toLowerCase()))
+            if (operation.operationAliases.contains(operationAlias.toLowerCase()))
                 return operation;
         }
         return null;

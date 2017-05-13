@@ -14,7 +14,7 @@ import static com.azouz.messageprocessor.domain.AdjustmentOperation.fromOperatio
 public class ThirdTypeParser extends MessageParser {
 
     protected Message parse(final String message) {
-        final Pattern p = Pattern.compile(getRegex());
+            final Pattern p = Pattern.compile(getRegex());
         final Matcher matcher = p.matcher(message);
         final AdjustmentMessage.Builder builder = AdjustmentMessage.builder();
         while (matcher.find()) {
@@ -28,6 +28,6 @@ public class ThirdTypeParser extends MessageParser {
 
     protected String getRegex() {
         // Add 20p apples
-        return "^(Add|Sub|Mul)\\s(\\d+)\\w+\\s(\\w+)s$";
+        return "^(Add|Addition|Sub|Subtract|Mul|Multiply)\\s(\\d+)\\w+\\s(\\w+)s$";
     }
 }

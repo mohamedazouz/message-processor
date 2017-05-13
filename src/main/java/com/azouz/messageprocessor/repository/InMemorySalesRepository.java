@@ -68,9 +68,10 @@ public class InMemorySalesRepository implements SalesRepository {
         productSalesMap.put(productName, newProductInfo);
 
         adjustmentSaleReport.add(
-                MessageFormat.format("Performing {0} on product: {1}, " +
-                                "it changed product value from {2} to {3}", adjustmentMessage.getOperation()
-                        , productName, oldProductInfo.getValue(), newProductInfo.getValue()));
+                MessageFormat.format("Performing {0}, value: {4} on product: {1}, " +
+                                "it changed product value from {2} to {3}", adjustmentMessage.getOperation(),
+                        productName, oldProductInfo.getValue(), newProductInfo.getValue(),
+                        adjustmentMessage.getValue()));
     }
 
     public void printSalesReport() {
